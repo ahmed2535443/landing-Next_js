@@ -12,6 +12,8 @@ const baseClasses =
 export function Button({
   className,
   variant = 'primary',
+  asChild = false,
+  children,
   ...props
 }: ButtonProps) {
   const variantClasses = {
@@ -20,5 +22,18 @@ export function Button({
     ghost: 'bg-transparent text-slate-700 hover:bg-slate-100',
   }
 
-  return <button className={cn(baseClasses, variantClasses[variant], className)} {...props} />
+  const classes = cn(baseClasses, variantClasses[variant], className)
+
+  if (asChild && React.isValidElement(children)) {
+    return React.cloneElement(children, {
+      className: cn(classes, children.props.className),
+      ...props,
+    })
+  }
+
+  return (
+    <button className={classes} {...props}>
+      {children}
+    </button>
+  )
 }
