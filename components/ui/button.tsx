@@ -25,10 +25,10 @@ export function Button({
   const classes = cn(baseClasses, variantClasses[variant], className)
 
   if (asChild && React.isValidElement(children)) {
-    return React.cloneElement(children, {
-      className: cn(classes, children.props.className),
+    return React.cloneElement(children as React.ReactElement<React.HTMLAttributes<HTMLElement>>, {
+      className: cn(classes, (children.props as React.HTMLAttributes<HTMLElement>).className),
       ...props,
-    })
+    } as React.HTMLAttributes<HTMLElement>)
   }
 
   return (
