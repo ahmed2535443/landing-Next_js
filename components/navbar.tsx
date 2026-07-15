@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import { siteConfig } from '@/lib/site-config'
+import { SignInButton, SignUpButton, UserButton } from '@clerk/nextjs'
 
 export function Navbar() {
   return (
@@ -15,9 +18,19 @@ export function Navbar() {
             </a>
           ))}
         </nav>
-        <a href="#contact" className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">
-          {siteConfig.hero.primaryCta.label}
-        </a>
+        <div className="flex items-center gap-3">
+          <SignInButton>
+            <button className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-900 transition hover:bg-slate-50">
+              تسجيل الدخول
+            </button>
+          </SignInButton>
+          <SignUpButton>
+            <button className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">
+              أنشئ حساب
+            </button>
+          </SignUpButton>
+          <UserButton />
+        </div>
       </div>
     </header>
   )
